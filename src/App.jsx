@@ -11,20 +11,14 @@ const App = () => {
   const [showAll, setShowAll] = useState(true)
 
   useEffect(() => {
-    console.log(notes.length)
-    console.log("effect");
     axios
     .get("http://localhost:3001/notes")
     .then( response => {
-      console.log("Promise fulfilled");
-      console.log(response.data)
       setNotes(response.data)
       //initial state will be ignore after react component render
       //render time: change in their state or props
     })
   }, [])
-  console.log('render', notes.length, 'notes')
-
 
   const notesToShow = showAll
   ? notes : notes.filter(note => note.important)
@@ -51,7 +45,6 @@ const App = () => {
         show {showAll ? 'important' : 'all'}
       </button>
       <ul>
-        {console.log(notesToShow)}
         {notesToShow.map(note => <Note key={note.id} note={note}/>)}
       </ul>
 
