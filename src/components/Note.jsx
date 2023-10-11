@@ -1,9 +1,15 @@
 import { useState } from 'react'
 import viteLogo from '/vite.svg'
 
-const Note = ({note}) => {
+const Note = ({ note, toggleImportance }) => {
+    const label = note.important ? 'make it not important' : 'make it important'
+
     return (
-        <li>{note.content}</li>
+        <>
+            <li>{note.content}</li>
+            <button onClick={toggleImportance}>{label}</button>
+        </>
+
     )
 }
 

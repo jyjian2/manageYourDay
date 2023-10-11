@@ -19,6 +19,16 @@
       "content": "test my first new note",
       "important": false,
       "id": 4
+    },
+    {
+      "content": "test my second new note",
+      "important": true,
+      "id": 5
+    },
+    {
+      "content": "",
+      "important": false,
+      "id": 6
     }
   ]
 }
