@@ -20,6 +20,21 @@ const App = () => {
       })
   }, [])
 
+  const toggleImportanceOf = (id) => {
+    const url = `http://localhost:3001/notes/${id}`
+    const note = notes.find(n=>n.id === id)
+    console.log(note)
+    const changedNote = {...note, important: !note.important}
+    note.important = !note.important
+    console.log(changedNote)
+
+    axios.put(url, changedNote).then(response=>{
+      console.log(response)
+      setNotes(notes.map(n => n.id != id ? n : response.data))
+    })
+
+  }
+
   const notesToShow = showAll
     ? notes : notes.filter(note => note.important)
 
@@ -50,7 +65,9 @@ const App = () => {
         show {showAll ? 'important' : 'all'}
       </button>
       <ul>
-        {notesToShow.map(note => <Note key={note.id} note={note} />)}
+        {/*pass note.id as props because the whole notes need to be rerendered.
+        Use note.id to check if the note's importance should be toggled */}
+        {notesToShow.map(note => <Note key={note.id} note={note} toggleImportance={() => toggleImportanceOf(note.id)}/>)}
       </ul>
 
       <form onSubmit={addNote}>
